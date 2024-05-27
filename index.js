@@ -7,7 +7,7 @@ import axios from 'axios';
 import process from 'process';
 
 const app = express();
-const port = process.env.PORT || 10000 || 3000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
@@ -36,14 +36,8 @@ app.post('/testchat', async (req, res) => {
         
     };
 
-    const apiKey = process.env.OPENAI_API_KEY;
-    if (!apiKey) {
-        console.error("API key is missing.");
-        return res.status(500).json({ error: "API key is missing." });
-    }
-
     const headers = {
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
         'Content-Type': 'application/json'
     };
 
@@ -69,13 +63,9 @@ app.post('/testchat', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
+  console.log(`OpenAI API Key: ${process.env.OPENAI_API_KEY}`);
 });
-
-// app.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-//   console.log(`OpenAI API Key: ${process.env.OPENAI_API_KEY}`);
-// });
 
 
 
