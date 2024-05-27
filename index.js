@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors({
-    origin: 'http://localhost:5173' // Allow only this origin to access
+    origin: '*' // Allow only this origin to access
 }));
 app.use(express.json());
 
