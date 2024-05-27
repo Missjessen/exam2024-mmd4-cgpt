@@ -36,8 +36,14 @@ app.post('/testchat', async (req, res) => {
         
     };
 
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+        console.error("API key is missing.");
+        return res.status(500).json({ error: "API key is missing." });
+    }
+
     const headers = {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
     };
 
@@ -63,9 +69,13 @@ app.post('/testchat', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-  console.log(`OpenAI API Key: ${process.env.OPENAI_API_KEY}`);
+    console.log(`Server is running on port ${port}`);
 });
+
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+//   console.log(`OpenAI API Key: ${process.env.OPENAI_API_KEY}`);
+// });
 
 
 
